@@ -17,15 +17,15 @@ cd /etc/openvpn/easy-rsa
 ./easyrsa init-pki
 ./easyrsa build-ca
 
-ÊäÈëpemÃÜÂë£¬ÔÙ´ÎÊäÈë£¬ÔÙ»Ø³µ
+è¾“å…¥pemå¯†ç ï¼Œå†æ¬¡è¾“å…¥ï¼Œå†å›è½¦
 
 ./easyrsa gen-req server1 nopass
 
-»Ø³µ
+å›è½¦
 
 ./easyrsa sign server server1 nopass
 
-ÊäÈëyes£¬ÊäÈëpemÃÜÂë
+è¾“å…¥yesï¼Œè¾“å…¥pemå¯†ç 
 
 ./easyrsa gen-dh
 mkdir /root/client
@@ -34,13 +34,13 @@ cd /root/client/easy-rsa
 ./easyrsa init-pki
 ./easyrsa gen-req client1 nopass
 
-»Ø³µ
+å›è½¦
 
 cd /etc/openvpn/easy-rsa
 ./easyrsa import-req /root/client/easy-rsa/pki/reqs/client1.req client1
 ./easyrsa sign client client1
 
-ÊäÈëyes£¬ÊäÈëpemÃÜÂë
+è¾“å…¥yesï¼Œè¾“å…¥pemå¯†ç 
 
 cp /etc/openvpn/easy-rsa/pki/ca.crt /etc/openvpn
 cp /etc/openvpn/easy-rsa/pki/private/server1.key /etc/openvpn
