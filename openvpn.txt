@@ -76,7 +76,6 @@ log-append /usr/local/openvpn/log/openvpn.log
 status /usr/local/openvpn/log/openvpn-status.log
 verb 3' >> /etc/openvpn/server.conf
 sed -i '/net.ipv4.ip_forward/s/0/1/g' /etc/sysctl.conf
-sysctl -w net.ipv4.ip_forward=1
 sysctl -p
 iptables -F
 iptables -t nat -A POSTROUTING -o eth0 -s 10.8.0.0/24 -j MASQUERADE
