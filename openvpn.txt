@@ -15,7 +15,7 @@ echo 'set_var EASYRSA_REQ_EMAIL      "test@adultv.tk"' >> /etc/openvpn/easy-rsa/
 echo 'set_var EASYRSA_REQ_OU         "adultv"' >> /etc/openvpn/easy-rsa/vars
 cd /etc/openvpn/easy-rsa
 ./easyrsa init-pki
-./easyrsa build-ca
+./easyrsa build-ca    #加个nopass，就是不设置pem密码
 
 输入pem密码，再次输入，再回车
 
