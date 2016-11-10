@@ -11,8 +11,8 @@ echo 'set_var EASYRSA_REQ_COUNTRY    "CN"' >> /etc/openvpn/easy-rsa/vars
 echo 'set_var EASYRSA_REQ_PROVINCE   "Beijing"' >> /etc/openvpn/easy-rsa/vars
 echo 'set_var EASYRSA_REQ_CITY       "Beijing"' >> /etc/openvpn/easy-rsa/vars
 echo 'set_var EASYRSA_REQ_ORG        "adultv"' >> /etc/openvpn/easy-rsa/vars
-echo 'set_var EASYRSA_REQ_EMAIL      "test@adultv.tk"' >> /etc/openvpn/easy-rsa/vars
-echo 'set_var EASYRSA_REQ_OU         "adultv"' >> /etc/openvpn/easy-rsa/vars
+echo 'set_var EASYRSA_REQ_EMAIL      "test@test.tk"' >> /etc/openvpn/easy-rsa/vars
+echo 'set_var EASYRSA_REQ_OU         "test"' >> /etc/openvpn/easy-rsa/vars
 cd /etc/openvpn/easy-rsa
 ./easyrsa init-pki
 ./easyrsa build-ca    #加个nopass，就是不设置pem密码
