@@ -15,17 +15,17 @@ echo 'set_var EASYRSA_REQ_EMAIL      "test@test.tk"' >> /etc/openvpn/easy-rsa/va
 echo 'set_var EASYRSA_REQ_OU         "test"' >> /etc/openvpn/easy-rsa/vars
 cd /etc/openvpn/easy-rsa
 ./easyrsa init-pki
-./easyrsa build-ca    #加个nopass，就是不设置pem密码
+./easyrsa build-ca    # 加个nopass，就是不设置pem密码
 
-输入pem密码，再次输入，再回车
+# 输入pem密码，再次输入，再回车
 
 ./easyrsa gen-req server1 nopass
 
-回车
+# 回车
 
 ./easyrsa sign server server1 nopass
 
-输入yes，输入pem密码
+# 输入yes，输入pem密码
 
 ./easyrsa gen-dh
 mkdir /root/client
@@ -34,13 +34,13 @@ cd /root/client/easy-rsa
 ./easyrsa init-pki
 ./easyrsa gen-req client1 nopass
 
-回车
+# 回车
 
 cd /etc/openvpn/easy-rsa
 ./easyrsa import-req /root/client/easy-rsa/pki/reqs/client1.req client1
 ./easyrsa sign client client1
 
-输入yes，输入pem密码
+# 输入yes，输入pem密码
 
 cp /etc/openvpn/easy-rsa/pki/ca.crt /etc/openvpn
 cp /etc/openvpn/easy-rsa/pki/private/server1.key /etc/openvpn
@@ -49,11 +49,14 @@ cp /etc/openvpn/easy-rsa/pki/dh.pem /etc/openvpn
 cp /etc/openvpn/easy-rsa/pki/ca.crt /root/client
 cp /etc/openvpn/easy-rsa/pki/issued/client1.crt /root/client
 cp /root/client/easy-rsa/pki/private/client1.key /root/client
+
 mkdir -p /usr/local/openvpn/log
 cp /etc/openvpn/server.conf /etc/openvpn/server.conf.example
 rm -rf /etc/openvpn/server.conf
+
 echo "local $ip
 port $port" >> /etc/openvpn/server.conf
+
 echo 'proto udp
 dev tun
 ca /etc/openvpn/ca.crt
@@ -75,14 +78,18 @@ log /usr/local/openvpn/log/openvpn.log
 log-append /usr/local/openvpn/log/openvpn.log
 status /usr/local/openvpn/log/openvpn-status.log
 verb 3' >> /etc/openvpn/server.conf
+
 sed -i '/net.ipv4.ip_forward/s/0/1/g' /etc/sysctl.conf
 sysctl -p
+
 iptables -F
 iptables -t nat -A POSTROUTING -o eth0 -s 10.8.0.0/24 -j MASQUERADE
 /etc/init.d/iptables save
 /etc/init.d/iptables restart
+
 chkconfig openvpn on
 service openvpn start
+
 echo "client
 dev tun
 proto udp
@@ -98,6 +105,7 @@ key-direction 1
 setenv opt block-outside-dns
 comp-lzo
 verb 3" >> /etc/openvpn/client.ovpn
+
 echo "<ca>" >> /etc/openvpn/client.ovpn
 cat /root/client/ca.crt >> /etc/openvpn/client.ovpn
 echo "</ca>" >> /etc/openvpn/client.ovpn
